@@ -35,6 +35,10 @@ playGame<- function(Mat,Vec){
         else if(playerA > playerB){
           Vec[i] = Vec[i] + 1
         }
+        else{
+          Vec[i] = Vec[i] + 0.5
+          Vec[j] = Vec[j] + 0.5
+        }
       }
     }
   }
@@ -60,5 +64,4 @@ repeat{
     break
   }
 }
-sort(c(9,5,20,4,15,16,15,3,6,1,3,3))
 
