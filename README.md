@@ -1,7 +1,7 @@
-# Colonel Blotto
+## Colonel Blotto
 Simulations for a Blotto Game
 
-#Introduction
+# Introduction
 The Colonel Blotto is as follows:
 
 Each player places 100 indistinguishable knights into 10 different castles labeled from 1 to 10. A battle consists of two players comparing their armies castle by castle. The player who wins the most castles will win the battle and gain 1 point. If they tie, they will each gain 0.5 points.
@@ -15,5 +15,5 @@ and nobody would win castle 10. 
 Since player 1 won more castles than player 2, player 1 wins this battle.
 
 
-#Motivation
+# Motivation
 I want to try and see if an optimal strategy can be found using various distributions
