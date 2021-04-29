@@ -15,6 +15,7 @@ Player 2 would win castles 4,5,8,9 <br />
 and nobody would win castle 10. <br />
 Since player 1 won more castles than player 2, player 1 wins this battle.<br />
 
+Given N players, each player plays N-1 times. The player who wins by the most points wins the round.
 
 # Motivation
 I want to try and see if an optimal strategy can be found using various distributions
