@@ -6,29 +6,53 @@ genNums <- function(n,dist){
   return(mat)
 }
 
-playGame<- function(Mat,Vec){
-  n = ncol(Mat)
+playGame<- function(Mat,vec, win,lose,ties){
+  n = nrow(Mat)
   for(i in 1:n){
     for(j in i:n){
-      if(i!= j){
+      if(i != j){
         temp <- Mat[i,] - Mat[j,]
-        playerB <- sum(temp < 0) + sum(temp == 0)
-        playerA <- sum(temp > 0) + sum(temp == 0)
+        playerB <- sum(temp <= 0)
+        playerA <- sum(temp >= 0)
         if(playerB >  playerA ){
-          Vec[j] = Vec[j] + 1
+          vec[j] = vec[j] + 1
+          win[j] = win[j] +1
+          lose[i] = lose[i] + 1
         }
         else if(playerA > playerB){
-          Vec[i] = Vec[i] + 1
+          vec[i] = vec[i] + 1
+          win[i] = win[i] + 1
+          lose[j] = lose[j] + 1
         }
         else{
-          Vec[i] = Vec[i] + 0.5
-          Vec[j] = Vec[j] + 0.5
+          vec[i] = vec[i] + 0.5
+          vec[j] = vec[j] + 0.5
+          ties[i] = ties[i] + 1
+          ties[j] = ties[j] + 1
         }
       }
     }
   }
-  return(Vec)
+  gameDF<- data.frame(vec,win,lose,ties)
+  return(gameDF)
 }
+
+
+winning.Scores <- read.csv("blottoscores_bonus_piazza.csv")
+winning.Scores <- (as.matrix(winning.Scores))
+winning.Scores <- subset(winning.Scores,select= c(8:17))
+winning.Scores <- mapply(winning.Scores, FUN=as.numeric)
+winning.Scores <- matrix(data=winning.Scores,ncol = 10)
+scoreVec <- numeric(nrow(winning.Scores))
+winVec <-numeric(nrow(winning.Scores))
+loseVec <-numeric(nrow(winning.Scores))
+tiesVec <-numeric(nrow(winning.Scores))
+
+classDF <-  playGame(winning.Scores,scoreVec,winVec,loseVec,tiesVec )
+
+
+
+
 R = 10
 rounds = 0
 repeat{
@@ -50,11 +74,5 @@ repeat{
   }
 }
 
-
-winning.Scores <- read.csv("blottoscores_bonus_piazza.csv")
-winning.Scores <- (as.matrix(winning.Scores))
-winning.Scores <- subset(winning.Scores,select= c(8:17))
-winVec <- numeric(10)
-playGame(winning.Scores, winVec)
 
 
